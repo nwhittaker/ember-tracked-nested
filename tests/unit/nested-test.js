@@ -16,6 +16,13 @@ module('nested()', function () {
       assert.deepEqual(Object.keys(nestedObject), ['a'], `nested will behave like it's wrapped object native methods`);
     });
 
+    test('null value', function (assert) {
+      const originalObject = { a: null };
+      const nestedObject = nested(originalObject).data;
+      assert.strictEqual(nestedObject.a, originalObject.a, 'Same property name will have the same value');
+      assert.deepEqual(Object.keys(nestedObject), ['a'], `nested will behave like it's wrapped object native methods`);
+    });
+
     test('original data is cloned inside nested', function (assert) {
       const originalData = { a: 1, b: { c: 1 } };
       const nestedData = nested(originalData).data;
