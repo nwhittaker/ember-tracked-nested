@@ -115,6 +115,24 @@ module('nested()', function () {
     setupRenderingTest(hooks);
 
     reactivityTest(
+      'works with nested optional object property',
+      class extends Component {
+        initialValue = '';
+        finalValue = 3;
+
+        @trackedNested obj;
+
+        get value() {
+          return this.obj?.foo?.bar;
+        }
+
+        update() {
+          this.obj = { foo: { bar: this.finalValue } };
+        }
+      }
+    );
+
+    reactivityTest(
       'works with nested object property',
       class extends Component {
         initialValue = 1;
